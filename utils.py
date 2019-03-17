@@ -24,14 +24,14 @@ def show_series(train, test=None, test_df=None, x_freq=50):
         plt.plot(test.index, test.values, label='test', color='C1')
         if len(test) == 1:
             plt.scatter(test.index, test.values, color='C1')
-            plt.xticks(stack((train.index, test.index))[::x_freq])
+        plt.xticks(stack((train.index, test.index))[::x_freq])
     else:
         minv = train.values.min()
         maxv = train.values.max()
 #         try:
 #             plt.xticks(pd.date_range(start=train.index[0], end=train.index[-1], freq='d').date.astype(str)[::x_freq])
 #         except:
-#         plt.xticks(train.index[::x_freq])
+        plt.xticks(train.index[::x_freq])
 #         plt.xticks(train.index.astype('datetime64[ns]').date.astype(str)[::x_freq])
     plt.legend()
     plt.yticks(stack(np.linspace(min(0, minv), maxv, 10)))
@@ -43,7 +43,7 @@ def split_ts(series, n_train):
     test = series.iloc[n_train:]
     n_test = len(test)
     print('{}: {} + {}'.format(N, n_train, n_test))
-    show_series(train, test)
+    show_series(train, test, x_freq=40)
     return train, test, n_test
 
 
